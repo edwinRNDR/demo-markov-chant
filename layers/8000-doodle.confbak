@@ -1,0 +1,46 @@
+{
+  time: 0.0
+  target: layer
+
+  objects: [
+    {
+      type: camera, time: 0.0, duration: 40.0
+      camera-type: perspective
+      fcurves: {
+        x: 0.0, y: 0.0, z: 2.0
+        rx: 0.0
+        fov: 45.0
+      }
+    }
+
+    {
+      id: paths0, type: paths-3d-from-obj
+      assets: [3d/average_female.obj]
+    }
+
+    {
+      id: paths1, type: paths-3d-tools
+      fcurves: {
+        c0: M0 L4 1.0, c1: 1.0
+      }
+      functions: {
+        input: "objectsById.paths0.functions.paths(0.0)"
+      }
+    }
+
+    {
+      type: wireframe, times: [0.0], duration: 4.0
+      target: layer-a
+
+      functions: {
+        input: "objectsById.paths1.functions.sub(t)"
+      }
+
+      fcurves: {
+        stroke-weight: 0.5
+        stroke-r: 0.1, stroke-g: 0.5, stroke-b: 0.8
+        y: -0.8
+      }
+    }
+  ]
+}
